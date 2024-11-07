@@ -1,71 +1,72 @@
 body {
-    color: #090502;
-    background-color: rgb(40, 31, 212);
-    /* Use a system font, if none are available use an available sans-sarif */
-    font-family: system-ui, sans-serif;
-    margin: 0;
-  }
+  color: #090502;
+  background-color: rgb(40, 31, 212);
+  /* Use a system font, if none are available use an available sans-sarif */
+  font-family: system-ui, sans-serif;
+  margin: 0;
+}
 
-  h1, h2, h3 {
-    justify-content: center;
-    text-align: center;
-  }
-  
-  .board {
-    display: flex;
-    flex-wrap: wrap;
-    margin-left: auto;
-    margin-right: auto;
-    width: 400px;
-    height: 400px;
+h1,
+h2,
+h3 {
+  justify-content: center;
+  text-align: center;
+}
 
-  }
-  
-  .sqr {
-    width: 30%;
-    aspect-ratio: 1/1;
-    border: 3px solid black;
-    font-size: 64px;
-    text-align: center;
-  }
-  
-  .sqr:hover {
-    background-color: #d27229;
-  }
+.board {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: auto;
+  margin-right: auto;
+  width: 400px;
+  height: 400px;
+}
+
+.sqr {
+  width: 30%;
+  aspect-ratio: 1/1;
+  border: 3px solid black;
+  font-size: 64px;
+  text-align: center;
+}
+
+.sqr:hover {
+  background-color: #d27229;
+}
 
 .sqr.X {
-  color: #FF5733;
+  color: #ff5733;
   font-weight: bold;
 }
 
 .sqr.O {
-  color: #33FF57;
+  color: #33ff57;
   font-weight: bold;
 }
 
 .sqr.winner {
-  background-color: #FFEB3B;
+  background-color: #ffeb3b;
   animation: pulse 1s infinite;
 }
 
-  #restartButton {
-    background-color: #008CBA;
-    border: 1px solid #000000;
-    color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    cursor: pointer;
-    border-radius: 12px;
-  }  
+#restartButton {
+  background-color: #008cba;
+  border: 1px solid #000000;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 12px;
+}
 
-  #restartButton:hover {
-    background-color: #d27229;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+#restartButton:hover {
+  background-color: #d27229;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
 }
 
 #message {
@@ -79,39 +80,51 @@ body {
 }
 
 .winner-message {
-  color: #4CAF50;
+  color: #4caf50;
   font-weight: bold;
   animation: celebrate 0.5s ease-in-out;
 }
 
 .tie-message {
-  color: #2196F3;
+  color: #2196f3;
   font-weight: bold;
 }
 
 @keyframes pulse {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.05); }
-  100% { transform: scale(1); }
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 
 @keyframes celebrate {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.1); }
-  100% { transform: scale(1); }
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 
 @media (max-width: 500px) {
   .board {
-      width: 300px;
-      height: 300px;
+    width: 300px;
+    height: 300px;
   }
 
   .sqr {
-      font-size: 48px;
+    font-size: 48px;
   }
 
   #message {
-      font-size: 20px;
+    font-size: 20px;
   }
 }
