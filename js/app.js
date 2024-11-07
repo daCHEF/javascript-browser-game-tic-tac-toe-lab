@@ -18,7 +18,6 @@
 /*--------------------------------- Constants --------------------------------*/
 
 
-
 /*----------------------------- Variables (state) ----------------------------*/
 let board;
 let turn;
@@ -27,39 +26,90 @@ let tie;
 
 
 /*------------------------- Cached Element References ------------------------*/
-const squareEls = [
-    document.getElementById('0'),
-    document.getElementById('1'),
-    document.getElementById('2'),
-    document.getElementById('3'),
-    document.getElementById('4'),
-    document.getElementById('5'),
-    document.getElementById('6'),
-    document.getElementById('7'),
-    document.getElementById('8'),
-];
+const squareEls = document.querySelectorAll('.sqr');
 const messageEl = document.getElementById('message');
+const resetBtn = document.getElementById('reset-button');
 
 
 /*--------------------------------- Functions --------------------------------*/
+//Sets the initial condition of the game
 function init() {
     console.log('Initializing the game...');
-    board = ['', '', '', '', '', '', '', ''];
-    turn = 'x';
+    board = ['', '', '', '', '', '', '', '', ''];
+    turn = 'X';
     winner = false;
     tie = false;
     render();
 }
+//Updates game status
 function render() {
-    for (let i = 0; i < board.length; i++) {
-        let squareElement = document.getElementById(i.toString('0'));
-        squareElement.textContent = board[i];
+    if (!squareEls.length || !messageEl) return;
+
+    // Updates board
+    squareEls.forEach((square, idx) => {
+        square.textContent = board[idx];
+        // Add visual feedback through classes
+        square.classList.remove('X', 'O');
+        if (board[idx]) {
+            square.classList.add(board[idx]);
+        }
+    });
+
+    if (winner) {
+        messageEl.textContent = `Player ${turn} Wins!`;
+        messageEl.classList.add('winner-message');
+    } else if (tie) {
+        messageEl.textContent = 'It\'s a Tie!';
+        messageEl.classList.add('tie-message');
+    } else {
+        messageEl.textContent = `Player ${turn}\'s Turn`;
+        messageEl.classList.remove('winner-message', 'tie-message');
     }
-    
 }
+
+function squareClick(index) { //checks if square is free
+    if (winner || tie || board[index] !== '') {
+     return;
+    }
+    board[index] = turn; //updates board with user's choice
+    checkWinOrTie();//checks if there's a winner or a tie
+    render();
+    turn = turn === 'X' ? 'O' : 'X'; //switches user's turn
+ }
+
+function checkWinOrTie() {
+    const winPatterns = [
+        [0, 1, 2], [3, 4, 5], [6, 7, 8],  // rows
+        [0, 3, 6], [1, 4, 7], [2, 5, 8],  // columns
+        [0, 4, 8], [2, 4, 6]              // diagonals
+    ];
+
+    for (let pattern of winPatterns) {
+        const [a, b, c] = pattern;
+        if (board[a] && board[a] === board[b] && board[a] === board[c]) {
+            winner = true;
+            return;
+        }
+    }
+
+    if (board.every(square => square !== '')) {
+        tie = true; //Looks for winner or squares remaining
+    }
+}
+
+
+
+
  
 
 /*------------------------------ Event Listeners -----------------------------*/
+for (let i = 0; i < squareEls.length; i++) {
+    //loops through each square
+    squareEls[i].addEventListener('click', function() {
+        squareClick(i);
+    });
+}
 
 
+init();
 
